@@ -3,23 +3,15 @@ version: 2.1
 commands:
   print_pipeline_id:
     description: "A very simple command for demonstration purposes"
-    parameters:
-      to:
-        type: string
-        default: "World"
     steps:
-      - run: echo Hello << parameters.to >> 
-      - run: echo $CIRCLE_WORKFLOW_ID 
-      - run: echo "inside commands loop"
+      - run: echo ${CIRCLE_WORKFLOW_ID} 
 jobs:
-  print_pipeline_id:
+  myjob:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "here is sayhello job"
-      - run: echo "inside jobs loop"
-      - run: echo $CIRCLE_WORKFLOW_ID
+      -  print_pipeline_id
 workflows:
-  welcome:
+  myworkflow:
     jobs:
-      - print_pipeline_id
+      - myjob
