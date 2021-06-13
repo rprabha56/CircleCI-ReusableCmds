@@ -8,13 +8,14 @@ commands:
         type: string
         default: "World"
     steps:
-      - run: echo Hello << parameters.to >>
+      - run: echo Hello << parameters.to >> 
 jobs:
   sayhello:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run: echo hello
+      - run: echo $CIRCLE_WORKFLOW_ID
 workflows:
   welcome:
     jobs:
